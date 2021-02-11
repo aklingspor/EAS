@@ -9,7 +9,10 @@ and enter it in the marketstack.class.php file
 For complete documentation on each endpoint and available paramaters 
 see https://marketstack.com/documentation 
 */ 
-echo $ticker;
+$ticker = $_POST["ticker"];
+if empty($ticker) {
+  die ("No ticker entered");
+}
 //turning off low level notices 
 error_reporting(E_ALL ^ E_NOTICE); 
 
