@@ -11,6 +11,7 @@ see https://marketstack.com/documentation
 */ 
 
 $ticker = $_GET["ticker"];
+echo $ticker;
 //turning off low level notices 
 error_reporting(E_ALL ^ E_NOTICE); 
 
