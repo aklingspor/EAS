@@ -10,6 +10,7 @@ For complete documentation on each endpoint and available paramaters
 see https://marketstack.com/documentation 
 */ 
 
+$ticker = $_GET["ticker"]
 //turning off low level notices 
 error_reporting(E_ALL ^ E_NOTICE); 
 
@@ -18,7 +19,7 @@ require('marketstack.class.php');
 $market = new marketStack(); 
 
 //get ticker information for Tesla
-$market->setEndPoint('tickers','TSLA'); 
+$market->setEndPoint('tickers',$ticker); 
 $market->getResponse(); 
 
 echo '<strong>'.$market->response->name.'</strong>'.' ('.$market->response->symbol.')'.'<br>'; 
@@ -26,7 +27,7 @@ echo $market->response->stock_exchange->acronym.'<br>';
 
 //get latest market activity for Microsoft 
 $market->setEndPoint('eod','latest'); 
-$market->setParam('symbols','TSLA'); 
+$market->setParam('symbols',$ticker); 
 $market->getResponse(); 
 
 $data = $market->response->data[0]; 
