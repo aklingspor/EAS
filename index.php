@@ -17,8 +17,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 require('marketstack.class.php'); 
 $market = new marketStack(); 
 
-//get ticker information for Microsoft symbol MSFT 
-$market->setEndPoint('tickers','MSFT'); 
+//get ticker information for Tesla
+$market->setEndPoint('tickers','TSLA'); 
 $market->getResponse(); 
 
 echo '<strong>'.$market->response->name.'</strong>'.' ('.$market->response->symbol.')'.'<br>'; 
@@ -26,7 +26,7 @@ echo $market->response->stock_exchange->acronym.'<br>';
 
 //get latest market activity for Microsoft 
 $market->setEndPoint('eod','latest'); 
-$market->setParam('symbols','MSFT'); 
+$market->setParam('symbols','TSLA'); 
 $market->getResponse(); 
 
 $data = $market->response->data[0]; 
@@ -38,14 +38,4 @@ echo '<strong>High: </strong>$'.$data->high.'<br>';
 echo '<strong>Low: </strong>$'.$data->low.'<br>'; 
 echo '<strong>Close: $'.$data->close.'</strong><br>'; 
 
-//list of supported exchanges 
-$market->setEndPoint('exchanges'); 
-$market->getResponse(); 
-
-echo '<hr>'; 
-echo '<h4>Marketstack supports the following exchanges:</h4>'; 
-
-foreach( $market->response->data as $data ){ 
-    echo '<strong>'.$data->mic.'</strong> '.$data->name.' ('.$data->acronym.') '.$data->city.' - '.$data->country.'</br>'; 
-} 
 ?> 
