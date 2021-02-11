@@ -7,7 +7,7 @@ $queryString = http_build_query(&#91;
 ]); 
  
 // API URL with query string 
-$apiURL = sprintf('%s?%s', 'https://api.marketstack.com/v1/eod', $queryString); 
+$apiURL = sprintf('%s?%s', 'http://api.marketstack.com/v1/eod', $queryString); 
  
 // Initialize cURL 
 $ch = curl_init(); 
