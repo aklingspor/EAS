@@ -1,6 +1,6 @@
 <?php
 $queryString = http_build_query([
-  'access_key' => '08d9a9c3b45bf0be7f7627fbc557f953'
+  'access_key' => '08d9a9c3b45bf0be7f7627fbc557f953', 'symbols' => 'TSLA'
 ]);
 
 $ch = curl_init(sprintf('%s?%s', 'https://api.marketstack.com/v1/tickers/aapl/eod', $queryString));
