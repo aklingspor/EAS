@@ -10,7 +10,7 @@ For complete documentation on each endpoint and available paramaters
 see https://marketstack.com/documentation 
 */ 
 $ticker = $_POST["ticker"];
-if empty($ticker) {
+if (empty($ticker)) {
   die ("No ticker entered");
 };
 //turning off low level notices 
