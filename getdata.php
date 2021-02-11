@@ -12,7 +12,7 @@ see https://marketstack.com/documentation
 $ticker = $_POST["ticker"];
 if empty($ticker) {
   die ("No ticker entered");
-}
+};
 //turning off low level notices 
 error_reporting(E_ALL ^ E_NOTICE); 
 
