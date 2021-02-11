@@ -1,34 +1,51 @@
-<?php
+<?php 
+/* 
+example usage 
+marketStack ver 1.0 
 
-// Set API access key 
-$queryString = http_build_query(&#91; 
-  'access_key' => '08d9a9c3b45bf0be7f7627fbc557f953', 
-  'symbols' => 'AAPL' 
-]); 
- 
-// API URL with query string 
-$apiURL = sprintf('%s?%s', 'http://api.marketstack.com/v1/eod', $queryString); 
- 
-// Initialize cURL 
-$ch = curl_init(); 
- 
-// Set URL and other appropriate options 
-curl_setopt($ch, CURLOPT_URL, $apiURL); 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
- 
-// Execute and get response from API 
-$api_response = curl_exec($ch); 
+You must get an API key from https://marketstack.com/product 
+and enter it in the marketstack.class.php file 
 
-// Convert API json response to array 
-$api_result = json_decode($api_response, true); 
- 
-echo $api_result;
+For complete documentation on each endpoint and available paramaters 
+see https://marketstack.com/documentation 
+*/ 
 
-// Output of the API data 
-foreach ($api_result&#91;'data'] as $data) { 
-    // Execution code goes here... 
-}
-// Close cURL 
-curl_close($ch);
+//turning off low level notices 
+error_reporting(E_ALL ^ E_NOTICE); 
 
-?>
+//instantiate the class 
+require('marketstack.class.php'); 
+$market = new marketStack(); 
+
+//get ticker information for Microsoft symbol MSFT 
+$market->setEndPoint('tickers','MSFT'); 
+$market->getResponse(); 
+
+echo '<strong>'.$market->response->name.'</strong>'.' ('.$market->response->symbol.')'.'<br>'; 
+echo $market->response->stock_exchange->acronym.'<br>'; 
+
+//get latest market activity for Microsoft 
+$market->setEndPoint('eod','latest'); 
+$market->setParam('symbols','MSFT'); 
+$market->getResponse(); 
+
+$data = $market->response->data[0]; 
+
+echo '<hr>'; 
+echo '<strong>Date: </strong>'.$data->date.'<br>'; 
+echo '<strong>Open: </strong>$'.$data->open.'<br>'; 
+echo '<strong>High: </strong>$'.$data->high.'<br>'; 
+echo '<strong>Low: </strong>$'.$data->low.'<br>'; 
+echo '<strong>Close: $'.$data->close.'</strong><br>'; 
+
+//list of supported exchanges 
+$market->setEndPoint('exchanges'); 
+$market->getResponse(); 
+
+echo '<hr>'; 
+echo '<h4>Marketstack supports the following exchanges:</h4>'; 
+
+foreach( $market->response->data as $data ){ 
+    echo '<strong>'.$data->mic.'</strong> '.$data->name.' ('.$data->acronym.') '.$data->city.' - '.$data->country.'</br>'; 
+} 
+?> 
