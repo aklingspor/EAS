@@ -39,7 +39,7 @@ echo '<strong>Date: </strong>'.$data->date.'<br>';
 echo '<strong>Open: </strong>$'.$data->open.'<br>'; 
 echo '<strong>High: </strong>$'.$data->high.'<br>'; 
 echo '<strong>Low: </strong>$'.$data->low.'<br>'; 
-echo '<strong>Volume: </strong>$'.$data->volume.'<br>'; 
+echo '<strong>Volume: </strong>'.$data->volume.'<br>'; 
 echo '<strong>Close: $'.$data->close.'</strong><br>'; 
 
 ?> 
